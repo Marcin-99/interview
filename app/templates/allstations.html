@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+
+{% block menubar %}
+<a class="col-lg-2 font-weight-bolder text-light text-center" style="text-decoration: none" href="{{ url_for('stations.addstation') }}">Add station</a>
+<a class="col-lg-2 font-weight-bolder text-info text-center" style="text-decoration: none" href="{{ url_for('stations.allstations') }}">All stations</a>
+<a class="col-lg-8 font-weight-bolder text-light text-right" style="text-decoration: none" href="{{ url_for('stations.json') }}">Get json</a>
+{% endblock menubar %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4 row">
+        <form method="POST" action="" class="col-md-12 my-3">
+            {{ delete_form.hidden_tag() }}
+            <div>
+                {{ delete_form.st_id.label(class="form-control-label") }}
+                {{ delete_form.st_id(class="form-control form-control-md") }}
+                <br>
+                <div class="text-center">
+                    {{ delete_form.submit(class="btn btn-outline-info") }}
+                </div>
+            </div>
+        </form>
+        <form method="POST" action="" class="col-md-12 border-top">
+            {{ update_form.hidden_tag() }}
+            <div>
+                {{ update_form.station_id.label(class="form-control-label") }}
+                {{ update_form.station_id(class="form-control form-control-md") }}
+
+                {{ update_form.coor_lat_new.label(class="form-control-label") }}
+                {{ update_form.coor_lat_new(class="form-control form-control-md") }}
+
+                {{ update_form.coor_lng_new.label(class="form-control-label") }}
+                {{ update_form.coor_lng_new(class="form-control form-control-md") }}
+
+                {{ update_form.kWh_price_new.label(class="form-control-label") }}
+                {{ update_form.kWh_price_new(class="form-control form-control-md") }}
+                <br>
+                <div class="text-center">
+                    {{ update_form.submit_2(class="btn btn-outline-info") }}
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-8 row">
+    {% for station in Stations %}
+        <station_section class="col-md-5 card card-body bg-light">
+            <div class="card-title">
+                <span class="font-weight-bolder"> ID: {{ station.id }}</span>
+            </div>
+            <div class="border-top">
+                <span>Coordinates: ({{ station.coor_lat }}, {{ station.coor_lng }})</span>
+            </div>
+            <div class="border-top">
+                <span>Created: {{ station.date_created }}</span>
+            </div>
+            <div class="border-top">
+                <span>Modified: {{ station.date_modified }}</span>
+            </div>
+            <div class="border-top">
+                <span>1kWh price: {{ station.kWh_price }}</span>
+            </div>
+        </station_section>
+    {% endfor %}
+</div>
+</div>
+
+{% endblock %}

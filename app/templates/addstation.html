@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block menubar %}
+<a class="col-lg-2 font-weight-bolder text-info text-center" style="text-decoration: none" href="{{ url_for('stations.addstation') }}">Add station</a>
+<a class="col-lg-2 font-weight-bolder text-light text-center" style="text-decoration: none" href="{{ url_for('stations.allstations') }}">All stations</a>
+<a class="col-lg-8 font-weight-bolder text-light text-right" style="text-decoration: none" href="{{ url_for('stations.json') }}">Get json</a>
+{% endblock menubar %}
+
+{% block content %}
+<div class="row mt-3">
+    <input_section class="offset-md-3 col-md-6 card card-body">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <div>
+                {{ form.id.label(class="form-control-label") }}
+                {{ form.id(class="form-control form-control-md") }}
+
+                {{ form.coor_lat_input.label(class="form-control-label") }}
+                {{ form.coor_lat_input(class="form-control form-control-md") }}
+
+                {{ form.coor_lng_input.label(class="form-control-label") }}
+                {{ form.coor_lng_input(class="form-control form-control-md") }}
+
+                {{ form.kWh_price_input.label(class="form-control-label") }}
+                {{ form.kWh_price_input(class="form-control form-control-md") }}
+                <br>
+                {{ form.recaptcha }}
+                <div class="text-center mt-3">
+                    {{ form.submit(class="btn btn-outline-info") }}
+                </div>
+            </div>
+
+        </form>
+
+    </input_section>
+</div>
+{% endblock %}
